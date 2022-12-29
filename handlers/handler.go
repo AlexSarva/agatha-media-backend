@@ -628,7 +628,7 @@ func GetGraphByUUID(database *app.Database, adminDB *admin.PostgresDB) http.Hand
 }
 
 func MyAllowOriginFunc(r *http.Request, origin string) bool {
-	if origin == "http://localhost:3000" || origin == "http://10.2.3.197:3000" {
+	if origin == "http://80.66.158.182:2908" || origin == "http://localhost:3000" || origin == "http://10.2.3.197:3000" {
 		return true
 	}
 	return false
@@ -639,7 +639,8 @@ func MyAllowOriginFunc(r *http.Request, origin string) bool {
 func MyHandler(database *app.Database, adminDatabase *admin.PostgresDB) *chi.Mux {
 	r := chi.NewRouter()
 	r.Use(cors.Handler(cors.Options{
-		AllowOriginFunc:  MyAllowOriginFunc,
+		AllowOriginFunc: MyAllowOriginFunc,
+		//AllowedOrigins:   []string{"https://*", "http://*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
